@@ -22,6 +22,7 @@ public class MovieAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Moviez> mMovieList;
     private LayoutInflater mInflater;
+    //public ArrayList<String> hasseenList;
 
 
     public MovieAdapter(Context mContext, ArrayList<Moviez> mMovieList){
@@ -31,6 +32,7 @@ public class MovieAdapter extends BaseAdapter {
         mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
+
 
     //methods
     @Override
@@ -79,7 +81,7 @@ public class MovieAdapter extends BaseAdapter {
         titleTextView.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
 
         descriptionTextView.setText(movie.description);
-        descriptionTextView.setTextSize(11);
+        descriptionTextView.setTextSize(9);
         descriptionTextView.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
 
 
@@ -89,8 +91,12 @@ public class MovieAdapter extends BaseAdapter {
         String comma = ", ";
         String characters = char1 + comma + char2 + comma + char3;
         charactersTextView.setText(characters);
-        charactersTextView.setTextSize(11);
+        charactersTextView.setTextSize(13);
         charactersTextView.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
+
+        if(movie.hasSeenUpdated) {
+            hasseenTextView.setText(movie.hasSeenString);
+        }
 
         Picasso.with(mContext).load(movie.poster_url).into(thumbnailImageView);
 
@@ -104,7 +110,7 @@ public class MovieAdapter extends BaseAdapter {
     }
 
 
-    private static class ViewHolder{
+    public static class ViewHolder{
         public TextView titleTextView;
         public TextView descriptionTextView;
         public TextView charactersTextView;

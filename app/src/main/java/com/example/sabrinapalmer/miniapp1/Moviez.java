@@ -21,6 +21,8 @@ public class Moviez {
     public String description;
     public String poster_url;
     public String url;
+    public boolean hasSeenUpdated = false;
+    public String hasSeenString = "Has seen?";
 
 
     public static ArrayList<Moviez> getMoviesFromFile(String filename, Context context){
@@ -37,6 +39,8 @@ public class Moviez {
                 Moviez movie = new Moviez();
                 movie.title = movies.getJSONObject(i).getString("title");
                 movie.episode = movies.getJSONObject(i).getInt("episode_number");
+                movie.description = movies.getJSONObject(i).getString("description");
+                movie.poster_url = movies.getJSONObject(i).getString("poster");
                 JSONArray js = movies.getJSONObject(i).getJSONArray("main_characters");
 
 
@@ -50,8 +54,7 @@ public class Moviez {
 
 
                 movie.main_characters = charac;
-                movie.description = movies.getJSONObject(i).getString("description");
-                movie.poster_url = movies.getJSONObject(i).getString("poster");
+
                 movie.url = movies.getJSONObject(i).getString("url");
 
                 // add to arraylist
@@ -82,9 +85,6 @@ public class Moviez {
 
         return json;
     }
-
-
-
 
 
 }

@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Already Seen"
-                    android:onClick="button1Selected"/>
+                    android:onClick="onRadioButtonClicked"/>
 
                 <RadioButton
                     android:id="@+id/movie_detail_want_to_see"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Want to see"
-                    android:onClick="button2Selected"/>
+                    android:onClick="onRadioButtonClicked"/>
 
                 <RadioButton
                     android:id="@+id/movie_detail_do_not_like"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Do not like"
-                    android:onClick="button3Selected"/>
+                    android:onClick="onRadioButtonClicked"/>
 
             </RadioGroup>
 

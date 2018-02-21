@@ -22,11 +22,13 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView posterimage;
     private TextView descriptiontext;
     private Button submitButton;
-    private int passedpos;
+    private int position;
+    private RadioButton radioButton1;
+    private RadioButton radioButton2;
+    private RadioButton radioButton3;
+    String checkedButton;
 
-    private boolean button1Selected;
-    private boolean button2Selected;
-    private boolean button3Selected;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         String title = this.getIntent().getExtras().getString("title");
         String poster = this.getIntent().getExtras().getString("poster");
         String description = this.getIntent().getExtras().getString("description");
-        passedpos = this.getIntent().getExtras().getInt("position");
+        position = this.getIntent().getExtras().getInt("position");
         //title
         setTitle(title);
         titletext = (TextView)findViewById(R.id.movie_detail_title);
@@ -54,16 +56,20 @@ public class MovieDetailActivity extends AppCompatActivity {
         descriptiontext = (TextView)findViewById(R.id.movie_detail_description);
         descriptiontext.setText(description);
 
+        radioButton1 = findViewById(R.id.movie_detail_already_seen);
+        radioButton2 = findViewById(R.id.movie_detail_want_to_see);
+        radioButton3 = findViewById(R.id.movie_detail_do_not_like);
+
         submitButton = findViewById(R.id.movie_detail_submit);
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
                 Intent radioIntent = new Intent();
-                radioIntent.putExtra("button1", button1Selected);
-                radioIntent.putExtra("button2", button2Selected);
-                radioIntent.putExtra("button3", button3Selected);
-                radioIntent.putExtra("postoreturn", passedpos);
+
+                radioIntent.putExtra("position", position);
+                radioIntent.putExtra("checkedRadioButton", checkedButton);
+
                 setResult(RESULT_OK, radioIntent);
                 finish();
             }
@@ -72,11 +78,26 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
-    public void button1Selected(View view) { button1Selected = ((RadioButton)view).isSelected();}
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.movie_detail_already_seen:
+                if (checked)
+                    checkedButton = "Already seen";
+                break;
+            case R.id.movie_detail_want_to_see:
+                if (checked)
+                    checkedButton = "Want to see";
+                break;
+            case R.id.movie_detail_do_not_like:
+                if (checked)
+                    checkedButton = "Do not like";
+                break;
 
-    public void button2Selected(View view) { button2Selected = ((RadioButton)view).isSelected();}
-
-    public void button3Selected(View view) { button3Selected = ((RadioButton)view).isSelected();}
+        }
+    }
 
 }
 
